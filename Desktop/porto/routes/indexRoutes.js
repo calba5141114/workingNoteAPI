@@ -8,7 +8,12 @@ Router.use(bodyParser.urlencoded({
     extended: true,
 }));
 
+
 Router.get('/', (req, res) => {
+
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     res.send({
         title: "PortoAPI",
         author: "Carlos A Alba Gutierrez",
@@ -17,15 +22,6 @@ Router.get('/', (req, res) => {
     });
 });
 
-Router.post('/', (req, res) => {
-    let name = req.query.name;
-    let color = req.query.color;
-    console.log(req.body);
-    res.send({
-        name: name,
-        color: color,
-    });
-});
 
 /**
  * @param {object} req - The POST methods Request Object
@@ -48,22 +44,33 @@ function saveNote(req) {
 
 Router.get('/note', (req, res) => {
 
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-
-    Note.find({}, (err, notes)=>{
-            let noteMap = {};
-            notes.forEach((note)=>{
-                noteMap[note._id] =  note;
-            })
-            res.send(noteMap);
+    Note.find({}, (err, notes) => {
+        let noteMap = {};
+        notes.forEach((note) => {
+            noteMap[note._id] = note;
+        })
+        res.send(noteMap);
     });
 
-    
+
 });
 
 Router.post('/note', (req, res) => {
-    saveNote(req);
-    res.send(req);
+
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+
+    try {
+        saveNote(req);
+        res.send('Success');
+    } catch (err) {
+        res.send(err);
+    }
+
 });
 
 module.exports = Router;
