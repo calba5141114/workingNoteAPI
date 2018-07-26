@@ -1,3 +1,5 @@
+
 {
-    "mongoURL": "mongodb://rooter:ZuccIsMoot1@ds253889.mlab.com:53889/palyhacks"
+    "mongoURL": "mongodb://rooter:ZuccIsMoot1@ds253889.mlab.com:53889/palyhacks",
+    "goals":["Allowing users to read each others notes before Auth Features","Allowing users to save notes"  ]
 }

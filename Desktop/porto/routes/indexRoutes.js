@@ -1,15 +1,15 @@
-const Express = require('express');
-const Router = Express.Router();
+const express = require('express');
+const router = express.Router();
 const bodyParser = require('body-parser');
 const Note = require('../models/note.js');
 
-Router.use(bodyParser.json());
-Router.use(bodyParser.urlencoded({
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({
     extended: true,
 }));
 
-
-Router.get('/', (req, res) => {
+// sends information about the API to the developers.
+router.get('/', (req, res) => {
 
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -18,15 +18,15 @@ Router.get('/', (req, res) => {
         title: "PortoAPI",
         author: "Carlos A Alba Gutierrez",
         date: "Thursday July 19th 2018",
-        versions: "0.1",
+        lastUpdated:"Thursday July 26 2018",
+        versions: "0.2",
     });
 });
 
-
 /**
- * @param {object} req - The POST methods Request Object
+ * @param {*} req - The POST methods Request Object
+ * @description saves to MongoDB
  */
-
 function saveNote(req) {
 
     let note = new Note({
@@ -42,7 +42,8 @@ function saveNote(req) {
 
 }
 
-Router.get('/note', (req, res) => {
+//  Sends back data from notes collection in mongoDB formatted out as JSON.
+router.get('/note', (req, res) => {
 
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -58,7 +59,8 @@ Router.get('/note', (req, res) => {
 
 });
 
-Router.post('/note', (req, res) => {
+//allows devs to POST a note data object to the MongoDB.
+router.post('/note', (req, res) => {
 
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -73,4 +75,5 @@ Router.post('/note', (req, res) => {
 
 });
 
-module.exports = Router;
+
+module.exports = router;
