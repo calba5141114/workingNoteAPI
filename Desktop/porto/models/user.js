@@ -15,10 +15,6 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, "No password? smh...."],
     },
-    passwordConfirmation: {
-        type: String,
-        required: [true, "confirm your password!"],
-    },
     name: {
         type: String,
         max: [30, "No more than 30 characters in your name at least not for us."],

@@ -8,10 +8,12 @@ mongoose.connect('mongodb://rooter:ZuccIsMoot1@ds253889.mlab.com:53889/palyhacks
     useNewUrlParser: true
 });
 
+//handles non auth features.
 app.use('/', router);
-app.use('/',regRouter);
+
+//handles user registration.
+app.use('/', regRouter);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("Server Successfully Started")
 });
-
