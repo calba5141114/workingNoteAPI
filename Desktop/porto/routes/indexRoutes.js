@@ -8,7 +8,18 @@ router.use(bodyParser.urlencoded({
     extended: true,
 }));
 
-// sends information about the API to the developers.
+/**
+ * The / endpoint 
+ * Sends specific information about the API
+ * like which version we are on, the last time
+ * the code was updated the creation date of 
+ * the original codebase the developers names who 
+ * are currently working on the project 
+ * the creator of the API and of course the name of the API.
+ * And of course this code can be used to give credit to those
+ * who worked on our project in a credits page.
+ */
+
 router.get('/', (req, res) => {
 
     res.header("Access-Control-Allow-Origin", "*");
@@ -23,10 +34,12 @@ router.get('/', (req, res) => {
     });
 });
 
+
 /**
  * @param {*} req - The POST methods Request Object
- * @description saves to MongoDB
+ * @description saves a note object to MongoDB
  */
+
 function saveNote(req) {
 
     let note = new Note({
@@ -41,6 +54,13 @@ function saveNote(req) {
     });
 
 }
+
+
+/**
+ * The /note endpoints are for users and developers to write and read
+ * notes saved into our mongo database these two methods will support a
+ * social interaction between communities in the future.
+ */
 
 //  Sends back data from notes collection in mongoDB formatted out as JSON.
 router.get('/note', (req, res) => {
@@ -64,7 +84,6 @@ router.post('/note', (req, res) => {
 
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
 
     try {
         saveNote(req);
